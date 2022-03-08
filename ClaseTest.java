@@ -17,11 +17,11 @@ public class ClaseTest {
 	@Test
 	void testRevisarExpresion()  {
 		Lector l = new Lector();
-		assertEquals(true,l.revisaExpresion("(+ 2 3)"));
-		assertEquals(true,l.revisaExpresion("(+ 2 3()()() (+ 3 4 3))"));
-		assertEquals(false,l.revisaExpresion("(+ 2 )3)"));
-		assertEquals(false,l.revisaExpresion("+ 2 (3)"));
-		assertEquals(false,l.revisaExpresion("(+ 2 )3"));
+		assertEquals(true,l.revisaExpresion("( + 2 3 )"));
+		assertEquals(true,l.revisaExpresion("( + 2 3 ( ) ( ) ( ) ( + 3 4 3 ) )"));
+		assertEquals(false,l.revisaExpresion("( + 2 ) 3 ) "));
+		assertEquals(false,l.revisaExpresion("+ 2 ( 3 ) "));
+		assertEquals(false,l.revisaExpresion(" ( + 2 ) 3"));
 		assertEquals(false,l.revisaExpresion(" "));
 	}
 }

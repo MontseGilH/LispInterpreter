@@ -18,7 +18,7 @@ public class Expresion extends Node{
         return tipo;
     }
 
-    
+
 	/**
 	 * Construye una lista de nodos
      * Esto es una expresion
@@ -27,11 +27,11 @@ public class Expresion extends Node{
     public Expresion(ArrayList<Node> listaNod){
         tipo = 3;
         lista = new ArrayList<Node>(listaNod);
-		dataTot = "("; 
+		dataTot = "( "; 
 		for (Node n : lista) {
-			dataTot += n.getDataTot() + " ";
+			dataTot += n.getDataTot();
+            dataTot +=  " ";
 		}
-		dataTot = dataTot.substring(0, dataTot.length()-1);
 		dataTot += ")";
     }
 }
