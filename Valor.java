@@ -17,6 +17,13 @@ public class Valor extends Node{
         return tipo; 
     }
 
+    
+    
+    
+    
+    
+    
+    
 	/**
 	 * Construye un valor
      * @param t el tipo

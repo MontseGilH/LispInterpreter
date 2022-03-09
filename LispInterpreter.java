@@ -20,7 +20,7 @@ public class LispInterpreter {
             } else {
                 try{
                     Node nodo = lector.stringANode(enunciado);
-                    System.out.println(nodo.dataTot);
+                    //System.out.println(nodo.dataTot);
                     System.out.println(nodo.tipo);
                     System.out.println(nodo.lista);
                 } catch (Exception e){
