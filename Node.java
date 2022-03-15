@@ -16,12 +16,41 @@ public abstract class Node {
     protected int tipo; //boolean = 0, float 1, string 2, lista 3
 
 	/**
-	 * Regresa la data
+	 * Regresa el tipo
+	 */
+    public abstract int type();
+    
+    /**
+	 * Establece la data
+	 */
+    public void setDataTot(String s){
+        this.dataTot = s;
+    }
+
+	/**
+	 * Regresa la lista
+	 */
+    public ArrayList<Node> getLista(){
+        return lista;
+    }
+
+	/**
+	 * Establece la lista
+	 */
+    public void setLista(ArrayList<Node> l){
+        this.lista = l;
+    }
+    
+	/**
+	 * Regresa la data del nodo
 	 */
     public String getDataTot(){
         return dataTot;
     }
 
+	/**
+	 * Regresa el nodo con la data ya evaluada
+	 */
     public Node getNodeEvaluated(){
         if (tipo==3){
             //es una expresion
@@ -213,26 +242,7 @@ public abstract class Node {
         }
     }
 
-    /**
-	 * Establece la data
-	 */
-    public void setDataTot(String s){
-        this.dataTot = s;
-    }
 
-	/**
-	 * Regresa la lista
-	 */
-    public ArrayList<Node> getLista(){
-        return lista;
-    }
-
-	/**
-	 * Establece la lista
-	 */
-    public void setLista(ArrayList<Node> l){
-        this.lista = l;
-    }
 
 	/**
 	 * Inicia un nodo principal
@@ -241,10 +251,7 @@ public abstract class Node {
         lista = new ArrayList<Node>();
     }
 
-	/**
-	 * Regresa el tipo
-	 */
-    public abstract int type();
+
 
     
 }
