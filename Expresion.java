@@ -18,11 +18,6 @@ public class Expresion extends Node{
         return tipo;
     }
 
-    
-    
-    
-    
-
 	/**
 	 * Construye una lista de nodos
      * Esto es una expresion

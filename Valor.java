@@ -18,12 +18,6 @@ public class Valor extends Node{
     }
 
     
-    
-    
-    
-    
-    
-    
 	/**
 	 * Construye un valor
      * @param t el tipo
@@ -56,13 +50,14 @@ public class Valor extends Node{
 
 	/**
 	 * Construye un valor tipo boolean
+     * @param va true = t, false = nul
 	 */
     public Valor(boolean va){
         tipo = 0;
         if (va){
-            dataTot = "true";
+            dataTot = "T";
         } else {
-            dataTot = "false";
+            dataTot = "NIL";
         }
         lista.add(this);
     }
