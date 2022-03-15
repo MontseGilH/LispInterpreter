@@ -88,10 +88,9 @@ public abstract class Node {
             // SETQ
             } else if (first.equalsIgnoreCase("SETQ")) {
                 //agrega una variable
-                AlmacenFunYVar alm = new AlmacenFunYVar();
                 String nombre =lista.get(1).getDataTot();
                 Node variable =  lista.get(2).getNodeEvaluated();
-                alm.addVar(nombre,variable);
+                AlmacenFunYVar.addVar(nombre,variable);
                 return new Valor(true);
                 
             // PREDICADOS ATOM LIST EQUAL < >
@@ -197,19 +196,17 @@ public abstract class Node {
             } else {
                 //evaluar lista
                 ArrayList<Node> nuevo = new ArrayList<Node>();
-                //quitar la palabra lista
-                lista.remove(0);
                 for (Node expresion:lista){
                     nuevo.add(expresion.getNodeEvaluated());
                 }
                 return new Expresion(nuevo);
             }
         } else {
-            AlmacenFunYVar alm = new AlmacenFunYVar();
+            
             //tiene que ser un valor
             //revisar si es una variable ya definida
-            if (alm.getVariables().containsKey(dataTot)){
-                return alm.getVariables().get(dataTot);
+            if (AlmacenFunYVar.getVariables().containsKey(dataTot)){
+                return AlmacenFunYVar.getVariables().get(dataTot);
             }
             //si no era variable solo se devuelve el mismo nodo
             return this;

@@ -8,13 +8,13 @@
 import java.util.HashMap;
 
 public class AlmacenFunYVar {
-    private HashMap<String, Node> variables = new HashMap<String,Node>();
-    private HashMap<String, Node> funciones = new HashMap<String,Node>();
+    public static HashMap<String, Node> variables = new HashMap<String,Node>();
+    public static HashMap<String, Node> funciones = new HashMap<String,Node>();
 
     /**
 	 * Regresa las funciones
 	 */
-    public HashMap<String, Node> getFunciones() {
+    public static HashMap<String, Node> getFunciones() {
         return funciones;
     }
 
@@ -23,7 +23,7 @@ public class AlmacenFunYVar {
      * @param nombre nombre de la variable
      * @param valor nodo con el valor de la variable
 	 */
-    public void addVar(String nombre, Node valor){
+    public static void addVar(String nombre, Node valor){
         variables.put(nombre,valor);
     }
 
@@ -32,30 +32,16 @@ public class AlmacenFunYVar {
      * @param nombre nombre de la variable
      * @param valor nodo con el valor de la funcion
 	 */
-    public void addFuncion(String nombre, Node funcion){
+    public static void addFuncion(String nombre, Node funcion){
         funciones.put(nombre,funcion);
     }
 
     /**
 	 * Regresa las variables
 	 */
-    public HashMap<String, Node> getVariables() {
+    public static HashMap<String, Node> getVariables() {
         return variables;
     }
 
-    /**
-	 * Establece las variables
-     * @param map con variables
-	 */
-    public void setVariables(HashMap<String, Node> variables) {
-        this.variables = variables;
-    }
 
-    /**
-	 * Establece las funciones
-     * @param map con funciones
-	 */
-    public void setFunciones(HashMap<String, Node> funciones) {
-        this.funciones = funciones;
-    }
 }
