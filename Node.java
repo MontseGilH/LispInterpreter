@@ -32,33 +32,37 @@ public abstract class Node {
             if (first.equalsIgnoreCase("+")){
                 //suma
                 int suma = 0;
-                for (int i = 0;i<(lista.size()-1);i++){
-                    int valor = Integer.valueOf(lista.get(i+1).getNodeEvaluated().getDataTot());
+                lista.remove(0);
+                for (int i = 0;i<lista.size();i++){
+                    int valor = Integer.valueOf(lista.get(i).getNodeEvaluated().getDataTot());
                     suma +=valor;
                 }
                 return new Valor(suma);
             } else if (first.equalsIgnoreCase("-")) {
                 //resta
-                int resta = 0;
-                for (int i = 0;i<(lista.size()-1);i++){
-                    int valor = Integer.valueOf(lista.get(i+1).getNodeEvaluated().getDataTot());
-                    resta +=valor;
+                lista.remove(0);
+                int resta = Integer.valueOf(lista.get(0).getNodeEvaluated().getDataTot());
+                for (int i = 1;i<lista.size();i++){
+                    int valor = Integer.valueOf(lista.get(i).getNodeEvaluated().getDataTot());
+                    resta -=valor;
                 }
                 return new Valor(resta);
             } else if (first.equalsIgnoreCase("*")) {
                 //multiplicacion
-                int multiplicacion = 0;
-                for (int i = 0;i<(lista.size()-1);i++){
-                    int valor = Integer.valueOf(lista.get(i+1).getNodeEvaluated().getDataTot());
-                    multiplicacion +=valor;
+                int multiplicacion = 1;
+                lista.remove(0);
+                for (int i = 0;i<lista.size();i++){
+                    int valor = Integer.valueOf(lista.get(i).getNodeEvaluated().getDataTot());
+                    multiplicacion *=valor;
                 }
                 return new Valor(multiplicacion);
             } else if (first.equalsIgnoreCase("/")) {
                 //division
-                int division = 0;
-                for (int i = 0;i<(lista.size()-1);i++){
-                    int valor = Integer.valueOf(lista.get(i+1).getNodeEvaluated().getDataTot());
-                    division +=valor;
+                lista.remove(0);
+                int division = Integer.valueOf(lista.get(0).getNodeEvaluated().getDataTot());
+                for (int i = 1;i<lista.size();i++){
+                    int valor = Integer.valueOf(lista.get(i).getNodeEvaluated().getDataTot());
+                    division /=valor;
                 }
                 return new Valor(division);
             
