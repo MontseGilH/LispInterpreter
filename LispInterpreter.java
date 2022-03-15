@@ -21,8 +21,8 @@ public class LispInterpreter {
                 try{
                     Node nodo = lector.stringANode(enunciado);
                     //System.out.println(nodo.dataTot);
-                    System.out.println(nodo.tipo);
-                    System.out.println(nodo.lista);
+                    System.out.println(nodo.getNodeEvaluated().getDataTot());
+                    
                 } catch (Exception e){
                     System.out.println(e.getMessage());
                 }
