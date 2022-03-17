@@ -51,7 +51,7 @@ public abstract class Node {
 	/**
 	 * Regresa el nodo con la data ya evaluada
 	 */
-    public Node getNodeEvaluated(){
+    public Node getNodeEvaluated() throws Exception{
         if (tipo==3){
             //es una expresion
             //obtener el primer valor 
@@ -107,12 +107,33 @@ public abstract class Node {
             // DEFINICION FUNCIONES
             } else if (first.equalsIgnoreCase("DEFUN")) {
                 //agrega una funcion con su nombre a la lista de funciones
+                String nombre = lista.get(1).getDataTot();
+                String var = lista.get(2).getLista().get(0).getDataTot();
+                String fun = lista.get(3).getDataTot();
+                AlmacenFunYVar.addFuncion(nombre, new Funcion(var,fun));
 
+                return new Valor(true);
 
-
-
-
-                return new Valor(false);
+            //revisar si es el nombre de una funcion
+            } else if (AlmacenFunYVar.getFunciones().containsKey(first)) {
+                String var = lista.get(1).getNodeEvaluated().getDataTot();
+                System.out.println(var);
+                String funcion = AlmacenFunYVar.getFunciones().get(first).getFuncion();
+                System.out.println(funcion);
+                String nomVariable = AlmacenFunYVar.getFunciones().get(first).getVariable();
+                System.out.println(nomVariable);
+                String[] l = funcion.split(" ");
+                //reemplazar variable con el nuevo numero
+                for (int i=0;i<funcion.length();i++){
+                    if (l[i]==nomVariable){
+                        l[i]= var;
+                    }
+                }
+                String funcionConVar = String.valueOf(l);
+                System.out.println(funcionConVar);
+                Lector lector = new Lector();
+                Node nodo = lector.stringANode(funcionConVar);
+                return nodo.getNodeEvaluated();
 
             // SETQ
             } else if (first.equalsIgnoreCase("SETQ")) {
@@ -232,8 +253,8 @@ public abstract class Node {
             }
         } else {
             
-            //tiene que ser un valor
-            //revisar si es una variable ya definida
+            //tiene que ser un valor 
+            //revisar si es una variable ya definida 
             if (AlmacenFunYVar.getVariables().containsKey(dataTot)){
                 return AlmacenFunYVar.getVariables().get(dataTot);
             }

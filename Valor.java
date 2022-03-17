@@ -12,7 +12,6 @@ public class Valor extends Node{
 	 * Regresa el tipo del valor
      * boolean = 0, float 1, string 2
 	 */
-    @Override
     public int type(){
         return tipo; 
     }
@@ -23,7 +22,7 @@ public class Valor extends Node{
      * @param t el tipo
      * @param d la data
 	 */
-    public Valor(int t, String d){
+    Valor(int t, String d){
         tipo = t;
         dataTot = d;
     }
@@ -31,7 +30,7 @@ public class Valor extends Node{
 	/**
 	 * Construye un valor tipo float
 	 */
-    public Valor(float va){
+    Valor(float va){
         tipo = 1;
         dataTot = String.valueOf(va);
         lista.add(this);
@@ -41,7 +40,7 @@ public class Valor extends Node{
 	/**
 	 * Construye un valor tipo string
 	 */
-    public Valor(String va){
+    Valor(String va){
         tipo = 2;
         dataTot = va;
         lista.add(this);
@@ -52,7 +51,7 @@ public class Valor extends Node{
 	 * Construye un valor tipo boolean
      * @param va true = t, false = nul
 	 */
-    public Valor(boolean va){
+    Valor(boolean va){
         tipo = 0;
         if (va){
             dataTot = "T";

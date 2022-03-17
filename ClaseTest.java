@@ -124,9 +124,13 @@ public class ClaseTest {
 	void testEvaluarDefun()  {
 		Lector l = new Lector();
 		try {
-			Node nodo = l.stringANode("( DEFUN 6 2 2 )");
-			assertEquals("NIL",nodo.getNodeEvaluated().getDataTot());
-			
+			Node nodo = l.stringANode("( DEFUN resta ( n ) ( - n 1 ) )");
+			nodo.getNodeEvaluated();
+			assertEquals(true,AlmacenFunYVar.getFunciones().containsKey("resta"));
+			assertEquals("n",AlmacenFunYVar.getFunciones().get("resta").getVariable());
+			assertEquals("( - n 1 )",AlmacenFunYVar.getFunciones().get("resta").getFuncion());
+			Node nodo2 = l.stringANode("( resta ( + 1 1 ) )");
+			assertEquals(0.0,nodo2.getNodeEvaluated().dataTot);
 		} catch (Exception e) {
 			
 		}

@@ -9,12 +9,12 @@ import java.util.HashMap;
 
 public class AlmacenFunYVar {
     public static HashMap<String, Node> variables = new HashMap<String,Node>();
-    public static HashMap<String, Node> funciones = new HashMap<String,Node>();
+    public static HashMap<String, Funcion> funciones = new HashMap<String,Funcion>();
 
     /**
 	 * Regresa las funciones
 	 */
-    public static HashMap<String, Node> getFunciones() {
+    public static HashMap<String, Funcion> getFunciones() {
         return funciones;
     }
 
@@ -32,7 +32,7 @@ public class AlmacenFunYVar {
      * @param nombre nombre de la variable
      * @param valor nodo con el valor de la funcion
 	 */
-    public static void addFuncion(String nombre, Node funcion){
+    public static void addFuncion(String nombre, Funcion funcion){
         funciones.put(nombre,funcion);
     }
 
