@@ -14,46 +14,6 @@ import java.util.ArrayList;
 public class Lector {
 
 
-	/**
-	 * Revisa a grandes rasgos que una expresion este bien escrita
-     * Se revisa que la cantidad de parentesis abiertos sea la misma que de cerrados
-     * @return si se cumple o no
-	 */
-    public boolean revisaExpresion(String s){
-
-        // verificar que el string sea un enunciado y este en notacion lisp
-        if (s == null || s.length() == 0){
-           return false;
-        }
-        if (!Character.toString(s.charAt(0)).equals("(")){
-            return false;
-        }
-        if (!Character.toString(s.charAt(1)).equals(" ")){
-            return false;
-        }
-        if (!Character.toString(s.charAt(s.length()-1)).equals(")")){
-            return false;
-        }
-        if (!Character.toString(s.charAt(s.length()-2)).equals(" ")){
-            return false;
-        }
-        
-
-        //revisar cuantos parentesis hay 
-        String[] caracteres = s.split("");
-        int inicioP = 0; //lleva el conteo de inicio de parentesis
-        int finalP = 0; //lleva el conteo de final de parentesis
-
-        for (String f:caracteres){
-            if (f.equals("(")){
-                inicioP ++;
-            } else if (f.equals(")")){
-                finalP++;
-            }
-        }
-        return inicioP == finalP;
-
-    }
 
 
 	/**
@@ -65,12 +25,42 @@ public class Lector {
         //creamos el arraylist de nodos
         ArrayList<Node> array = new ArrayList<Node>();
 
-        //revisamos que este bien escrita
-        boolean escritura = revisaExpresion(s);
-        if (!escritura){
-            throw new Exception("error - no se cumple con la escritura adecuada");
-        }
+        
 
+        if (s == null || s.length() == 0){
+        	throw new Exception(" - no se cumple con la escritura adecuada");
+         }
+         if (!Character.toString(s.charAt(0)).equals("(")){
+        	 throw new Exception(" - no se cumple con la escritura adecuada");
+         }
+         if (!Character.toString(s.charAt(1)).equals(" ")){
+        	 throw new Exception(" - no se cumple con la escritura adecuada");
+         }
+         if (!Character.toString(s.charAt(s.length()-1)).equals(")")){
+        	 throw new Exception(" - no se cumple con la escritura adecuada");
+         }
+         if (!Character.toString(s.charAt(s.length()-2)).equals(" ")){
+        	 throw new Exception(" - no se cumple con la escritura adecuada");
+         }
+        
+       //revisar cuantos parentesis hay 
+         String[] caracteres = s.split("");
+         int inicioP = 0; //lleva el conteo de inicio de parentesis
+         int finalP = 0; //lleva el conteo de final de parentesis
+
+         for (String f:caracteres){
+             if (f.equals("(")){
+                 inicioP ++;
+             } else if (f.equals(")")){
+                 finalP++;
+             }
+         }
+         
+         if (!(inicioP==finalP)) {
+        	 throw new Exception(" - no se cumple con la escritura adecuada");
+         }
+        
+        
         //la expresion  es la base, por lo que quitamos el parentesis inicial y final
         //de igual manera se quitan los espacios que deberian ir
         s = s.substring(2,s.length()-2);

@@ -17,12 +17,12 @@ public class ClaseTest {
 	@Test
 	void testRevisarExpresion()  {
 		Lector l = new Lector();
-		assertEquals(true,l.revisaExpresion("( + 2 3 )"));
-		assertEquals(true,l.revisaExpresion("( + 2 3 ( ) ( ) ( ) ( + 3 4 3 ) )"));
-		assertEquals(false,l.revisaExpresion("( + 2 ) 3 ) "));
-		assertEquals(false,l.revisaExpresion("+ 2 ( 3 ) "));
-		assertEquals(false,l.revisaExpresion(" ( + 2 ) 3"));
-		assertEquals(false,l.revisaExpresion(" "));
+		try {
+			 assertEquals("error - no se cumple con la escritura adecuada",l.stringANode("( + 2 3 3 4 5 6 12 "));
+			 assertEquals("error - no se cumple con la escritura adecuada",l.stringANode("+ 2 3 3 4 5 6 12 "));
+			 assertEquals("error - no se cumple con la escritura adecuada",l.stringANode("(+ 2 3 3 4 5 6 12)"));
+		} catch (Exception e) {	
+		}
 	}
 	
 	/**
@@ -36,6 +36,7 @@ public class ClaseTest {
 		try {
 			 nodo = l.stringANode("( + 2 3 )");
 			 nodo2 = l.stringANode("( + 2 3 3 4 5 6 12 )");
+			 assertEquals("error - no se cumple con la escritura adecuada",l.stringANode("( + 2 3 3 4 5 6 12 "));
 		} catch (Exception e) {	
 		}
 		assertEquals("5.0",nodo.getNodeEvaluated().getDataTot());
