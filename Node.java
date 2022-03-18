@@ -1,11 +1,10 @@
 /**
- * Ultima modificacion: 7/03/2022
+ * Ultima modificacion: 18/03/2022
  * 
  * Clase que crea un Nodo
  * @file Node.java
  */
 import java.util.ArrayList;
-
 
 public abstract class Node {
     //protected float dataF;
@@ -17,11 +16,13 @@ public abstract class Node {
 
 	/**
 	 * Regresa el tipo
+     * @return
 	 */
     public abstract int type();
     
     /**
 	 * Establece la data
+     * @param s string con la data
 	 */
     public void setDataTot(String s){
         this.dataTot = s;
@@ -29,6 +30,7 @@ public abstract class Node {
 
 	/**
 	 * Regresa la lista
+     * @return
 	 */
     public ArrayList<Node> getLista(){
         return lista;
@@ -36,6 +38,7 @@ public abstract class Node {
 
 	/**
 	 * Establece la lista
+     * @param l lista con los nodos
 	 */
     public void setLista(ArrayList<Node> l){
         this.lista = l;
@@ -43,6 +46,7 @@ public abstract class Node {
     
 	/**
 	 * Regresa la data del nodo
+     * @return
 	 */
     public String getDataTot(){
         return dataTot;
@@ -50,6 +54,7 @@ public abstract class Node {
 
 	/**
 	 * Regresa el nodo con la data ya evaluada
+     * @return
 	 */
     public Node getNodeEvaluated(){
         if (tipo==3){
@@ -107,29 +112,30 @@ public abstract class Node {
             // DEFINICION FUNCIONES
             } else if (first.equalsIgnoreCase("DEFUN")) {
             	//agrega una funcion con su nombre a la lista de funciones
+                //obtener el nombre
                 String nombre = lista.get(1).getDataTot();
+                //obtener todas las variables
                 ArrayList<String> variables = new ArrayList<String>();
                 for (Node e : lista.get(2).getLista()){
                     variables.add(e.getDataTot());
                 }
-                
+                //Obtener el string que define la funcion
                 String fun = lista.get(3).getDataTot();
-                
+                //agregar funcion al almacen
                 AlmacenFunYVar.addFuncion(nombre, new Funcion(variables,fun));
-
                 return new Valor(true);
 
             //revisar si es el nombre de una funcion
             } else if (AlmacenFunYVar.getFunciones().containsKey(first)) {
             	ArrayList<String> varArray = new ArrayList<String>();
+                //obtener el valor de las variables a evaluar
             	Node variable = lista.get(1).getNodeEvaluated();
             	for (Node vars: variable.getLista()) {
-            		
             		varArray.add(vars.getNodeEvaluated().getDataTot());
             	}
-            	
-            
+                //Obtener el string que definia la funcion
                 String funcion = AlmacenFunYVar.getFunciones().get(first).getFuncion();
+                //Obtener el nombre de las variables a reemplazar
                 ArrayList<String> nomVariables = AlmacenFunYVar.getFunciones().get(first).getVariables();
                 String[] l = funcion.split(" ");
                 //reemplazar variable con el nuevo numero
@@ -137,8 +143,6 @@ public abstract class Node {
                 for (String s: l) {
                     boolean agregar = true;
                     for (int i = 0;i<nomVariables.size();i++){
-                    	
-            
                         if (s.equals(nomVariables.get(i))){
                             f+=varArray.get(i);
                             f+= " ";
@@ -150,14 +154,13 @@ public abstract class Node {
                 		f+= " ";
                 	}
                 }
-                
                 Lector lector = new Lector();
+                //crear un nodo con la funcion y evaluar
                 Node nodo = null;
                 try {
                 	nodo = lector.stringANode(f.substring(0,f.length()-1));
                 } catch (Exception e) {
                 }
-                
                 return nodo.getNodeEvaluated();
 
             // SETQ
@@ -294,6 +297,7 @@ public abstract class Node {
 
 	/**
 	 * Inicia un nodo principal
+     * Constructor
 	 */
     public Node(){
         lista = new ArrayList<Node>();

@@ -1,32 +1,24 @@
 import java.util.ArrayList;
 
-//import java.util.ArrayList;
-
-
 /**
- * Ultima modificacion: 1/07/2022
+ * Ultima modificacion: 18/03/2022
  * 
  * Clase que interpreta un string en listas
  * @file Lector.java
  */
 
-
 public class Lector {
-
-
-
 
 	/**
 	 * Pasa una expresion a un conjunto de nodos
+     * Tambien revisa que la escritura de la expresion
      * @param String
      * @return Node
 	 */
     public Node stringANode(String s) throws Exception{
         //creamos el arraylist de nodos
         ArrayList<Node> array = new ArrayList<Node>();
-
-        
-
+        //revisamos la escritura
         if (s == null || s.length() == 0){
         	throw new Exception(" - no se cumple con la escritura adecuada");
          }
@@ -55,12 +47,9 @@ public class Lector {
                  finalP++;
              }
          }
-         
          if (!(inicioP==finalP)) {
         	 throw new Exception(" - no se cumple con la escritura adecuada");
          }
-        
-        
         //la expresion  es la base, por lo que quitamos el parentesis inicial y final
         //de igual manera se quitan los espacios que deberian ir
         s = s.substring(2,s.length()-2);

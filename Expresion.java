@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Ultima modificacion: 7/03/2022
+ * Ultima modificacion: 18/03/2022
  * 
  * Clase que crea y maneja una expresion de lisp
  * @file Expresion.java
@@ -13,6 +13,7 @@ public class Expresion extends Node{
 	/**
 	 * Regresa el tipo de nodo
      * En este caso siempre sera 3, al ser una lista
+     * @return
 	 */
     public int type(){
         return tipo;

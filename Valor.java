@@ -1,5 +1,5 @@
 /**
- * Ultima modificacion: 7/03/2022
+ * Ultima modificacion: 18/03/2022
  * 
  * Clase que crea y maneja un valor de lisp
  * @file Valor.java
@@ -7,28 +7,17 @@
 
 public class Valor extends Node{
     
-
 	/**
 	 * Regresa el tipo del valor
-     * boolean = 0, float 1, string 2
+     * boolean 0, float 1, string 2
 	 */
     public int type(){
         return tipo; 
     }
 
-    
-	/**
-	 * Construye un valor
-     * @param t el tipo
-     * @param d la data
-	 */
-    Valor(int t, String d){
-        tipo = t;
-        dataTot = d;
-    }
-
 	/**
 	 * Construye un valor tipo float
+     * @param va float con el valor del valor
 	 */
     Valor(float va){
         tipo = 1;
@@ -39,6 +28,7 @@ public class Valor extends Node{
 
 	/**
 	 * Construye un valor tipo string
+     * @param va string con el valor del valor
 	 */
     Valor(String va){
         tipo = 2;

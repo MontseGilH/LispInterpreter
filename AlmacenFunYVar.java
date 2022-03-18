@@ -1,20 +1,21 @@
 /**
- * Ultima modificacion: 1/03/2022
+ * Ultima modificacion: 18/03/2022
  * 
  * Clase que almacena funciones y variables definidas anteriormente
+ * Esta clase es static para poder acceder a las variables y funciones guardadas desde cualquier punto del programa
  * @file AlmacenFunYVar.java
  */
-//import java.util.ArrayList;
+
 import java.util.HashMap;
 
 public class AlmacenFunYVar {
+
     public static HashMap<String, Node> variables = new HashMap<String,Node>();
     public static HashMap<String, Funcion> funciones = new HashMap<String,Funcion>();
     
-
-
     /**
 	 * Regresa las funciones
+     * @return 
 	 */
     public static HashMap<String, Funcion> getFunciones() {
         return funciones;
@@ -40,6 +41,7 @@ public class AlmacenFunYVar {
 
     /**
 	 * Regresa las variables
+     * @return
 	 */
     public static HashMap<String, Node> getVariables() {
         return variables;
