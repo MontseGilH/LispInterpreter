@@ -1,21 +1,23 @@
+import java.util.ArrayList;
+
 /**
- * Ultima modificacion: 7/03/2022
+ * Ultima modificacion: 17/03/2022
  * 
  * Clase que crea una funcion
  * @file Funcion.java
  */
 
 public class Funcion {
-    private String variable;
+    private ArrayList<String> variables;
     private String funcion;
 
-    Funcion(String var,String fun){
-        variable = var;
+    Funcion(ArrayList<String> vars,String fun){
+        variables = vars;
         funcion =fun;
     }
 
-    public String getVariable() {
-        return variable;
+    public ArrayList<String> getVariables() {
+        return variables;
     }
     public String getFuncion() {
         return funcion;
@@ -23,8 +25,8 @@ public class Funcion {
     public void setFuncion(String funcion) {
         this.funcion = funcion;
     }
-    public void setVariable(String variable) {
-        this.variable = variable;
+    public void setVariables(ArrayList<String> variables) {
+        this.variables = variables;
     }
     
     

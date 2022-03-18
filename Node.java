@@ -99,44 +99,53 @@ public abstract class Node {
             } else if (first.equalsIgnoreCase("'")||first.equalsIgnoreCase("QUOTE")) {
                 //regresa el valor de la expresion sin evaluar
                 ArrayList<Node> nExp = new ArrayList<Node>();
-                for (int i=1;i<lista.size();i++){
+                for (int i=1;i<(lista.size());i++){
                     nExp.add(lista.get(i));
                 }
                 return new Expresion(nExp);
 
             // DEFINICION FUNCIONES
             } else if (first.equalsIgnoreCase("DEFUN")) {
-                //agrega una funcion con su nombre a la lista de funciones
+            	//agrega una funcion con su nombre a la lista de funciones
                 String nombre = lista.get(1).getDataTot();
-                
-                String var = lista.get(2).getLista().get(0).getDataTot();
+                ArrayList<String> variables = new ArrayList<String>();
+                for (Node e : lista.get(2).getLista()){
+                    variables.add(e.getDataTot());
+                }
                 
                 String fun = lista.get(3).getDataTot();
                 
-                AlmacenFunYVar.addFuncion(nombre, new Funcion(var,fun));
+                AlmacenFunYVar.addFuncion(nombre, new Funcion(variables,fun));
 
                 return new Valor(true);
 
             //revisar si es el nombre de una funcion
             } else if (AlmacenFunYVar.getFunciones().containsKey(first)) {
-            	String var ="";
+            	ArrayList<String> varArray = new ArrayList<String>();
             	Node variable = lista.get(1).getNodeEvaluated();
-            	if (!(variable.type()==3)) {
+            	for (Node vars: variable.getLista()) {
             		
-            		var += variable.getDataTot();
-            	} else {
-            		var = variable.getLista().get(0).getDataTot();
+            		varArray.add(vars.getNodeEvaluated().getDataTot());
             	}
+            	
+            
                 String funcion = AlmacenFunYVar.getFunciones().get(first).getFuncion();
-                String nomVariable = AlmacenFunYVar.getFunciones().get(first).getVariable();
+                ArrayList<String> nomVariables = AlmacenFunYVar.getFunciones().get(first).getVariables();
                 String[] l = funcion.split(" ");
                 //reemplazar variable con el nuevo numero
                 String f = "";
                 for (String s: l) {
-                	if (s.equals(nomVariable)) {
-                		f+=var;
-                		f+= " ";
-                	} else {
+                    boolean agregar = true;
+                    for (int i = 0;i<nomVariables.size();i++){
+                    	
+            
+                        if (s.equals(nomVariables.get(i))){
+                            f+=varArray.get(i);
+                            f+= " ";
+                            agregar = false;
+                        }
+                    }
+                	if (agregar) {
                 		f+=s;
                 		f+= " ";
                 	}
@@ -273,7 +282,7 @@ public abstract class Node {
             //revisar si es una variable ya definida 
             if (AlmacenFunYVar.getVariables().containsKey(dataTot)){
             	String n = AlmacenFunYVar.getVariables().get(dataTot).getDataTot();
-            	n = n.substring(2,n.length()-2);
+            	
                 return new Valor(n);
             }
             //si no era variable solo se devuelve el mismo nodo

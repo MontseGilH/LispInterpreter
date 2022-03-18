@@ -24,7 +24,7 @@ public class LispInterpreter {
                     System.out.println(nodo.getNodeEvaluated().getDataTot());
                     
                 } catch (Exception e){
-                    System.out.println(e.getMessage());
+                    System.out.println("Error "+e.getMessage());
                 }
             }
         }
