@@ -10,6 +10,8 @@ import java.util.HashMap;
 public class AlmacenFunYVar {
     public static HashMap<String, Node> variables = new HashMap<String,Node>();
     public static HashMap<String, Funcion> funciones = new HashMap<String,Funcion>();
+    
+
 
     /**
 	 * Regresa las funciones

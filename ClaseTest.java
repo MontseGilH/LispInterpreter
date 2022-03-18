@@ -88,7 +88,7 @@ public class ClaseTest {
 			Node nodo = l.stringANode("( / 6 2 )");
 			assertEquals("3.0",nodo.getNodeEvaluated().getDataTot());
 			Node nodo2 = l.stringANode("( / 2 4 )");
-			assertEquals("0.0",nodo2.getNodeEvaluated().getDataTot());
+			assertEquals("0.5",nodo2.getNodeEvaluated().getDataTot());
 			Node nodo3 = l.stringANode("( / 85 5 )");
 			assertEquals("17.0",nodo3.getNodeEvaluated().getDataTot());
 		} catch (Exception e) {
@@ -123,18 +123,38 @@ public class ClaseTest {
 	@Test
 	void testEvaluarDefun()  {
 		Lector l = new Lector();
+		Node nodo = null;
+		Node nodo2 = null;
+		Node nodo3 = null;
+		Node nodo4 = null;
+		Node nodo5 = null;
+		Node nodo6 = null;
+		Node nodo7 = null;
+		Node nodo8 = null;
 		try {
-			Node nodo = l.stringANode("( DEFUN resta ( n ) ( - n 1 ) )");
-			nodo.getNodeEvaluated();
-			assertEquals(true,AlmacenFunYVar.getFunciones().containsKey("resta"));
-			assertEquals("n",AlmacenFunYVar.getFunciones().get("resta").getVariable());
-			assertEquals("( - n 1 )",AlmacenFunYVar.getFunciones().get("resta").getFuncion());
-			Node nodo2 = l.stringANode("( resta ( + 1 1 ) )");
-			assertEquals(0.0,nodo2.getNodeEvaluated().dataTot);
+			 nodo = l.stringANode("( DEFUN resta ( n ) ( - n 1 ) )");
+			 nodo2 = l.stringANode("( resta ( + 1 1 ) )");
+			 nodo3 = l.stringANode("( resta ( 1 ) )");
+			 nodo4 = l.stringANode("( DEFUN FTOC ( temp ) ( / ( - temp 32 ) 1.8 ) )");
+			 nodo5 = l.stringANode("( FTOC ( 212 ) )");
+			 nodo6 = l.stringANode("( FTOC ( 33 ) )");
+			 nodo7 = l.stringANode("( DEFUN FIBONACCI ( n ) ( COND  ( ( = n 0.0 ) 0.0 )   ( ( = n 1.0 ) 1.0 )    ( T ( + ( FIBONACCI ( - n 1.0 ) ) ( FIBONACCI ( - n 2.0 ) ) ) ) ) )");
+			 nodo8 = l.stringANode("( FIBONACCI ( 9 ) )");
 		} catch (Exception e) {
 			
 		}
-		
+		nodo.getNodeEvaluated();
+		nodo4.getNodeEvaluated();
+		nodo7.getNodeEvaluated();
+		assertEquals(true,AlmacenFunYVar.getFunciones().containsKey("resta"));
+		assertEquals("n",AlmacenFunYVar.getFunciones().get("resta").getVariable());
+		assertEquals("( - n 1 )",AlmacenFunYVar.getFunciones().get("resta").getFuncion());
+		assertEquals("( / ( - temp 32 ) 1.8 )",AlmacenFunYVar.getFunciones().get("FTOC").getFuncion());
+		assertEquals("1.0",nodo2.getNodeEvaluated().dataTot);
+		assertEquals("0.0",nodo3.getNodeEvaluated().dataTot);
+		assertEquals("100.0",nodo5.getNodeEvaluated().dataTot);
+		assertEquals("0.5555556",nodo6.getNodeEvaluated().dataTot);
+		assertEquals("34.0",nodo8.getNodeEvaluated().dataTot);
 	}
 	
 	/**
@@ -144,13 +164,19 @@ public class ClaseTest {
 	void testEvaluarSetQ()  {
 		Lector l = new Lector();
 		try {
-
+			Node nodo = l.stringANode("( nombre2 )");
+			Node nodo1 = l.stringANode("( SETQ num 2 )");
 			Node nodo2 = l.stringANode("( SETQ nombre2 maria2 )");
+			Node nodo4 = l.stringANode("( num )");
 			nodo2.getNodeEvaluated();
+			nodo1.getNodeEvaluated();
 			assertEquals(false,AlmacenFunYVar.getVariables().containsKey("maria2"));
 			assertEquals(true,AlmacenFunYVar.getVariables().containsKey("nombre2"));
 			//assertEquals(true,AlmacenFunYVar.getVariables().containsValue(new Valor("maria2")));
 			assertEquals("maria2",AlmacenFunYVar.getVariables().get("nombre2").getNodeEvaluated().getDataTot());
+			assertEquals("2",nodo4.getNodeEvaluated().getDataTot());
+			assertEquals("maria2",nodo.getNodeEvaluated().getDataTot());
+			
 			
 		} catch (Exception e) {
 			

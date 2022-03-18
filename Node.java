@@ -51,7 +51,7 @@ public abstract class Node {
 	/**
 	 * Regresa el nodo con la data ya evaluada
 	 */
-    public Node getNodeEvaluated() throws Exception{
+    public Node getNodeEvaluated(){
         if (tipo==3){
             //es una expresion
             //obtener el primer valor 
@@ -60,37 +60,37 @@ public abstract class Node {
             //OPERACIONES ARIMTETICAS + - * /
             if (first.equalsIgnoreCase("+")){
                 //suma
-                int suma = 0;
+                float suma = 0;
                 lista.remove(0);
                 for (int i = 0;i<lista.size();i++){
-                    int valor = Integer.valueOf(lista.get(i).getNodeEvaluated().getDataTot());
+                    float valor = Float.parseFloat(lista.get(i).getNodeEvaluated().getDataTot());
                     suma +=valor;
                 }
                 return new Valor(suma);
             } else if (first.equalsIgnoreCase("-")) {
                 //resta
                 lista.remove(0);
-                int resta = Integer.valueOf(lista.get(0).getNodeEvaluated().getDataTot());
+                float resta = Float.parseFloat(lista.get(0).getNodeEvaluated().getDataTot());
                 for (int i = 1;i<lista.size();i++){
-                    int valor = Integer.valueOf(lista.get(i).getNodeEvaluated().getDataTot());
+                    float valor = Float.parseFloat(lista.get(i).getNodeEvaluated().getDataTot());
                     resta -=valor;
                 }
                 return new Valor(resta);
             } else if (first.equalsIgnoreCase("*")) {
                 //multiplicacion
-                int multiplicacion = 1;
+                float multiplicacion = 1;
                 lista.remove(0);
                 for (int i = 0;i<lista.size();i++){
-                    int valor = Integer.valueOf(lista.get(i).getNodeEvaluated().getDataTot());
+                    float valor = Float.parseFloat(lista.get(i).getNodeEvaluated().getDataTot());
                     multiplicacion *=valor;
                 }
                 return new Valor(multiplicacion);
             } else if (first.equalsIgnoreCase("/")) {
                 //division
                 lista.remove(0);
-                int division = Integer.valueOf(lista.get(0).getNodeEvaluated().getDataTot());
+                float division = Float.parseFloat(lista.get(0).getNodeEvaluated().getDataTot());
                 for (int i = 1;i<lista.size();i++){
-                    int valor = Integer.valueOf(lista.get(i).getNodeEvaluated().getDataTot());
+                    float valor = Float.parseFloat(lista.get(i).getNodeEvaluated().getDataTot());
                     division /=valor;
                 }
                 return new Valor(division);
@@ -108,31 +108,47 @@ public abstract class Node {
             } else if (first.equalsIgnoreCase("DEFUN")) {
                 //agrega una funcion con su nombre a la lista de funciones
                 String nombre = lista.get(1).getDataTot();
+                
                 String var = lista.get(2).getLista().get(0).getDataTot();
+                
                 String fun = lista.get(3).getDataTot();
+                
                 AlmacenFunYVar.addFuncion(nombre, new Funcion(var,fun));
 
                 return new Valor(true);
 
             //revisar si es el nombre de una funcion
             } else if (AlmacenFunYVar.getFunciones().containsKey(first)) {
-                String var = lista.get(1).getNodeEvaluated().getDataTot();
-                System.out.println(var);
+            	String var ="";
+            	Node variable = lista.get(1).getNodeEvaluated();
+            	if (!(variable.type()==3)) {
+            		
+            		var += variable.getDataTot();
+            	} else {
+            		var = variable.getLista().get(0).getDataTot();
+            	}
                 String funcion = AlmacenFunYVar.getFunciones().get(first).getFuncion();
-                System.out.println(funcion);
                 String nomVariable = AlmacenFunYVar.getFunciones().get(first).getVariable();
-                System.out.println(nomVariable);
                 String[] l = funcion.split(" ");
                 //reemplazar variable con el nuevo numero
-                for (int i=0;i<funcion.length();i++){
-                    if (l[i]==nomVariable){
-                        l[i]= var;
-                    }
+                String f = "";
+                for (String s: l) {
+                	if (s.equals(nomVariable)) {
+                		f+=var;
+                		f+= " ";
+                	} else {
+                		f+=s;
+                		f+= " ";
+                	}
                 }
-                String funcionConVar = String.valueOf(l);
-                System.out.println(funcionConVar);
+                
                 Lector lector = new Lector();
-                Node nodo = lector.stringANode(funcionConVar);
+                Node nodo = null;
+                try {
+                	nodo = lector.stringANode(f.substring(0,f.length()-1));
+                } catch (Exception e) {
+                }
+                
                 return nodo.getNodeEvaluated();
 
             // SETQ
@@ -160,7 +176,7 @@ public abstract class Node {
                     nuevo.add(expresion.getNodeEvaluated());
                 }
                 return new Expresion(nuevo);
-            } else if (first.equalsIgnoreCase("EQUAL")) {
+            } else if (first.equalsIgnoreCase("EQUAL")||first.equalsIgnoreCase("=")) {
                 //revisa si son iguales los 2 elementos
                 String n1 = lista.get(1).getNodeEvaluated().getDataTot();
                 String n2 =lista.get(2).getNodeEvaluated().getDataTot();
@@ -256,7 +272,9 @@ public abstract class Node {
             //tiene que ser un valor 
             //revisar si es una variable ya definida 
             if (AlmacenFunYVar.getVariables().containsKey(dataTot)){
-                return AlmacenFunYVar.getVariables().get(dataTot);
+            	String n = AlmacenFunYVar.getVariables().get(dataTot).getDataTot();
+            	n = n.substring(2,n.length()-2);
+                return new Valor(n);
             }
             //si no era variable solo se devuelve el mismo nodo
             return this;
