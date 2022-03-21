@@ -66,7 +66,9 @@ public abstract class Node {
             if (first.equalsIgnoreCase("+")){
                 //suma
                 float suma = 0;
+                //se quita la palabra suma
                 lista.remove(0);
+                //se suman todos los elementos adentro de la lista
                 for (int i = 0;i<lista.size();i++){
                     float valor = Float.parseFloat(lista.get(i).getNodeEvaluated().getDataTot());
                     suma +=valor;
@@ -74,8 +76,11 @@ public abstract class Node {
                 return new Valor(suma);
             } else if (first.equalsIgnoreCase("-")) {
                 //resta
+                //se quita la palabra resta
                 lista.remove(0);
+                //se toma el primer numero
                 float resta = Float.parseFloat(lista.get(0).getNodeEvaluated().getDataTot());
+                // se restan todos los siguientes numeros a el primer numero de la lista
                 for (int i = 1;i<lista.size();i++){
                     float valor = Float.parseFloat(lista.get(i).getNodeEvaluated().getDataTot());
                     resta -=valor;
@@ -84,7 +89,9 @@ public abstract class Node {
             } else if (first.equalsIgnoreCase("*")) {
                 //multiplicacion
                 float multiplicacion = 1;
+                //se quita la palabra multiplicacion
                 lista.remove(0);
+                //se multiplican todos los numeros dentro de la lista
                 for (int i = 0;i<lista.size();i++){
                     float valor = Float.parseFloat(lista.get(i).getNodeEvaluated().getDataTot());
                     multiplicacion *=valor;
@@ -92,8 +99,11 @@ public abstract class Node {
                 return new Valor(multiplicacion);
             } else if (first.equalsIgnoreCase("/")) {
                 //division
+                //se quita la palabra division
                 lista.remove(0);
+                //se toma el primer numero de la lista
                 float division = Float.parseFloat(lista.get(0).getNodeEvaluated().getDataTot());
+                //el primer numero se divide dentro de todos los numeros en la lista
                 for (int i = 1;i<lista.size();i++){
                     float valor = Float.parseFloat(lista.get(i).getNodeEvaluated().getDataTot());
                     division /=valor;
@@ -103,11 +113,10 @@ public abstract class Node {
             // INSTRUCCION QUOTE
             } else if (first.equalsIgnoreCase("'")||first.equalsIgnoreCase("QUOTE")) {
                 //regresa el valor de la expresion sin evaluar
-                ArrayList<Node> nExp = new ArrayList<Node>();
-                for (int i=1;i<(lista.size());i++){
-                    nExp.add(lista.get(i));
-                }
-                return new Expresion(nExp);
+                //se quita la palabra quote
+                lista.remove(0);
+                //se regresa el mismo nodo
+                return new Expresion(lista);
 
             // DEFINICION FUNCIONES
             } else if (first.equalsIgnoreCase("DEFUN")) {
